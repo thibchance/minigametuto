@@ -70,8 +70,7 @@ public class PlayerController : MonoBehaviour
         {
             transform.position = spawnTransform.position;
             //gamemanager.PlayerDie();
-
-            Destroy(collision.gameObject);
+            
         }
         if (collision.tag == "Heart")
         {

@@ -30,13 +30,7 @@ public class EnnemiController : MonoBehaviour {
     {
 		
 	}
-    private void OnTriggerEnter(Collider collision)
-    {
-        if(collision.tag == "Limit")
-        {
-            Destroy(collision.gameObject);
-        }
-    }
+   
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Hit")
