@@ -48,13 +48,14 @@ public class GameManager : MonoBehaviour
         life++;
         textlifeplayer.text = TEXT_LIFE + life;
     }
+
     public void MonsterDie()
     {
         life--;
 
         if (life <= 0)
         {
-            SceneManager.LoadScene("Gameover");
+            SceneManager.LoadScene("WinMenu");
 
             //SceneManager.LoadScene("StartMenu");
         }

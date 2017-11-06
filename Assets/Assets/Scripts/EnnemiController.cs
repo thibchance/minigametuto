@@ -30,6 +30,13 @@ public class EnnemiController : MonoBehaviour {
     {
 		
 	}
+    private void OnTriggerEnter(Collider collision)
+    {
+        if(collision.tag == "Limit")
+        {
+            Destroy(collision.gameObject);
+        }
+    }
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Hit")
@@ -61,7 +68,7 @@ public class EnnemiController : MonoBehaviour {
             {
                 GameObject bullet = Instantiate(bulletPrefab, t.position, t.rotation);
                 bullet.GetComponent<Rigidbody2D>().velocity = t.right * bulletVelocity;
-                Destroy(bullet, 1);
+                Destroy(bullet, 5);
             }
 
         }

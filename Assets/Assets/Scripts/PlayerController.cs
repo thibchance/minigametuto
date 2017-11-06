@@ -33,15 +33,15 @@ public class PlayerController : MonoBehaviour
     private float timetofire = 2;
     private float lasttimefire = 0;
 
-    private Rigidbody2D rigid;
+    private Rigidbody2D rigidbody;
     private Transform spawnTransform;
     private GameManager gamemanager;
-    
+  
 
     // Use this for initialization
     void Start ()
     {
-        rigid = GetComponent<Rigidbody2D>();
+        rigidbody= GetComponent<Rigidbody2D>();
         spawnTransform = GameObject.Find("Spawn").transform;
        
         gamemanager = FindObjectOfType<GameManager>();
@@ -53,11 +53,11 @@ public class PlayerController : MonoBehaviour
         float HorizontalInput = Input.GetAxis("Horizontal");
         Vector2 forceDirection = new Vector2(HorizontalInput, 0);
         forceDirection *= force;
-        rigid.AddForce(forceDirection);
+        rigidbody.AddForce(forceDirection);
         bool touchfloor = Physics2D.OverlapCircle(positionRaycastJump.position, radiusRaycastJump, LayerMaskJump);
         if (Input.GetAxis("Jump") > 0 && touchfloor)
         {
-            rigid.AddForce(Vector2.up * forcejump, ForceMode2D.Impulse);
+            rigidbody.AddForce(Vector2.up * forcejump, ForceMode2D.Impulse);
         }
         if (Input.GetAxis("Fire1") > 0)
         {
@@ -70,12 +70,14 @@ public class PlayerController : MonoBehaviour
         {
             transform.position = spawnTransform.position;
             //gamemanager.PlayerDie();
-            
+
+            Destroy(collision.gameObject);
         }
         if (collision.tag == "Heart")
         {
             gamemanager.lifes();
             Destroy(collision.gameObject);
+
         }
 
     }
@@ -83,15 +85,18 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.tag == "HitEnnemi")
         {
-
+           
+            Destroy(collision.gameObject);
             gamemanager.PlayerDie();
         }
     }
 
+    
     private void Fire()
     {
         if (Time.realtimeSinceStartup - lasttimefire > timetofire)
         {
+
             GameObject bullet = Instantiate(bulletPrefab, guntransform.position, guntransform.rotation);
             bullet.GetComponent<Rigidbody2D>().velocity = guntransform.right * bulletVelocity;
             Destroy(bullet, 5);
