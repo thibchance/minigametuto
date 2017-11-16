@@ -49,19 +49,19 @@ public class GameManager : MonoBehaviour
         textlifeplayer.text = TEXT_LIFE + life;
     }
 
-    public void MonsterDie()
-    {
-        life--;
+    //public void MonsterDie()
+    //{
+    //    life--;
 
-        if (life <= 0)
-        {
-            SceneManager.LoadScene("WinMenu");
+    //    if (life <= 0)
+    //    {
+    //        SceneManager.LoadScene("SecondLevel");
 
-            //SceneManager.LoadScene("StartMenu");
-        }
-        else
-        {
-            textlifemonster.text = TEXT_LIFE + life;
-        }
-    }
+    //        //SceneManager.LoadScene("StartMenu");
+    //    }
+    //    else
+    //    {
+    //        textlifemonster.text = TEXT_LIFE + life;
+    //    }
+    //}
 }

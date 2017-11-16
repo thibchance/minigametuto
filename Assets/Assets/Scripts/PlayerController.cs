@@ -24,24 +24,26 @@ public class PlayerController : MonoBehaviour
     [Header("Fire gun super sonic lol boum")]
 
     [SerializeField]
-    private GameObject bulletPrefab;
+     GameObject bulletPrefab;
     [SerializeField]
-    private Transform guntransform;
+     Transform guntransform;
     [SerializeField]
-    private float bulletVelocity = 2;
+     float bulletVelocity = 2;
     [SerializeField]
-    private float timetofire = 2;
+    float timetofire = 2;
     private float lasttimefire = 0;
 
     private Rigidbody2D rigidbody;
     private Transform spawnTransform;
     private GameManager gamemanager;
-  
-
+    private Animator PlayerAnimation;
+    private SpriteRenderer render;
     // Use this for initialization
     void Start ()
     {
-        rigidbody= GetComponent<Rigidbody2D>();
+        rigidbody = GetComponent<Rigidbody2D>();
+        PlayerAnimation = GetComponent<Animator>();
+        render = GetComponent<SpriteRenderer>();
         spawnTransform = GameObject.Find("Spawn").transform;
        
         gamemanager = FindObjectOfType<GameManager>();
@@ -51,6 +53,9 @@ public class PlayerController : MonoBehaviour
 	void Update ()
     {
         float HorizontalInput = Input.GetAxis("Horizontal");
+        PlayerAnimation.SetFloat("speedX", Mathf.Abs(HorizontalInput));
+        PlayerAnimation.SetFloat("VelocityY", rigidbody.velocity.y);
+        render.flipX = HorizontalInput < 0;
         Vector2 forceDirection = new Vector2(HorizontalInput, 0);
         forceDirection *= force;
         rigidbody.AddForce(forceDirection);
@@ -58,7 +63,13 @@ public class PlayerController : MonoBehaviour
         if (Input.GetAxis("Jump") > 0 && touchfloor)
         {
             rigidbody.AddForce(Vector2.up * forcejump, ForceMode2D.Impulse);
+            PlayerAnimation.SetTrigger("Jump");
         }
+        else
+        {
+            PlayerAnimation.SetBool("IsGrounded", touchfloor);
+        }
+        
         if (Input.GetAxis("Fire1") > 0)
         {
             Fire();

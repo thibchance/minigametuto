@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 public class EnnemiController : MonoBehaviour {
 
     [SerializeField]
@@ -13,35 +13,44 @@ public class EnnemiController : MonoBehaviour {
     [SerializeField]
     private float bulletVelocity = 10;
     private GameManager gamemanager;
-   
-   
+
+    private int life = 3;
+    private Animator ennemianimation;
 
      int timeflash = 5;
     // Use this for initialization
 
     void Start ()
     {
+        ennemianimation = GetComponent<Animator>();
         StartCoroutine(fire());
+
         gamemanager = FindObjectOfType<GameManager>();
     }
 	
 	// Update is called once per frame
 	void Update ()
     {
-		
+        ennemianimation.SetTrigger("Attack");
 	}
    
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Hit")
         {
-            
+            life--;
             Destroy(collision.gameObject);
             timeflash = timeflash + 2;
-            gamemanager.MonsterDie();
+            //gamemanager.MonsterDie();
             StartCoroutine(Flash());
-
+            if(life == 0)
+            {
+                Destroy(this.gameObject);
+             
+            }
+          
         }
+        
     }
    private IEnumerator Flash()
     {
@@ -49,8 +58,9 @@ public class EnnemiController : MonoBehaviour {
         {
             GetComponent<SpriteRenderer>().color = Color.clear;
             yield return new WaitForSeconds(.1f);
-            GetComponent<SpriteRenderer>().color = Color.magenta;
+            GetComponent<SpriteRenderer>().color = Color.white;
             yield return new WaitForSeconds(.1f);
+            //GetComponent<Spr>
         }
     }
     private IEnumerator fire()
@@ -67,4 +77,5 @@ public class EnnemiController : MonoBehaviour {
 
         }
     }
+   
 }

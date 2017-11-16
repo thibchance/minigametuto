@@ -18,7 +18,6 @@ public class Randomheart : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
-        Debug.Log(spawntime);
         if(GameObject.Find("heart(Clone)") == null)
         {
             spawntime += Time.deltaTime;

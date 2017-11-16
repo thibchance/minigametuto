@@ -12,5 +12,11 @@ EditorBuildSettings:
     path: Assets/Assets/scenes/firstlevel.unity
     guid: 7a769f4753ec00244b5fed5291bf5165
   - enabled: 1
+    path: Assets/Assets/scenes/SecondLevel.unity
+    guid: ba91de5319e6d014b8fb09be23c6d78c
+  - enabled: 1
     path: Assets/Assets/scenes/Gameover.unity
     guid: fe40c1b099aa3b749ae5f7ab6af7961f
+  - enabled: 1
+    path: Assets/Assets/scenes/WinMenu.unity
+    guid: ed9834cf0e35f1e45aa99d8da19384fc
