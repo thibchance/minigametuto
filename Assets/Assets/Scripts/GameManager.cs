@@ -14,9 +14,10 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     
     private const string TEXT_LIFE = "Life = ";
-   
-	// Use this for initialization
-	void Start ()
+    [SerializeField]
+    private GameObject[] ennemi;
+    // Use this for initialization
+    void Start ()
     {
         textlifeplayer.text = TEXT_LIFE + life;
         textlifemonster.text = TEXT_LIFE + life;
@@ -25,7 +26,12 @@ public class GameManager : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
-		
+        Debug.Log(ennemi.Length);
+		if (ennemi.Length == 0)
+        {
+            
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex+1);
+        }
 	}
     public void PlayerDie()
     {
@@ -49,19 +55,9 @@ public class GameManager : MonoBehaviour
         textlifeplayer.text = TEXT_LIFE + life;
     }
 
-    //public void MonsterDie()
-    //{
-    //    life--;
+    public void MonsterDie()
+    {
+       // ennemi.Length =ennemi.Length- 1;
+    }
 
-    //    if (life <= 0)
-    //    {
-    //        SceneManager.LoadScene("SecondLevel");
-
-    //        //SceneManager.LoadScene("StartMenu");
-    //    }
-    //    else
-    //    {
-    //        textlifemonster.text = TEXT_LIFE + life;
-    //    }
-    //}
 }

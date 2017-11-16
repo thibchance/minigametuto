@@ -16,7 +16,9 @@ public class EnnemiController : MonoBehaviour {
 
     private int life = 3;
     private Animator ennemianimation;
-
+   
+    private GameObject[] ennemi = {};
+     
      int timeflash = 5;
     // Use this for initialization
 
@@ -38,17 +40,23 @@ public class EnnemiController : MonoBehaviour {
     {
         if (collision.gameObject.tag == "Hit")
         {
-            life--;
+            
             Destroy(collision.gameObject);
             timeflash = timeflash + 2;
-            //gamemanager.MonsterDie();
+           
             StartCoroutine(Flash());
-            if(life == 0)
-            {
-                Destroy(this.gameObject);
-             
+            life--;
+            
+
+                if (life == 0)
+                {
+                    Destroy(this.gameObject);
+               // gamemanager.MonsterDie();
+
             }
-          
+
+
+
         }
         
     }
